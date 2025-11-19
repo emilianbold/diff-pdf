@@ -61,6 +61,26 @@ $ sudo dnf install diff-pdf
 Precompiled version for openSUSE can be downloaded from the
 [openSUSE build service](http://software.opensuse.org).
 
+### Using Docker
+
+If you have Docker installed, you can use diff-pdf without installing any dependencies locally:
+
+```
+$ ./diff-pdf.sh --output-diff=diff.pdf a.pdf b.pdf
+```
+
+The wrapper script will automatically build the Docker image if needed. Alternatively, you can use Docker directly:
+
+```
+$ docker build -t diff-pdf:latest .
+$ docker run --rm -v "$(pwd):/pdfs" -w /pdfs diff-pdf:latest --output-diff=diff.pdf a.pdf b.pdf
+```
+
+Pre-built Docker images are available from GitHub Container Registry:
+```
+$ docker pull ghcr.io/emilianbold/diff-pdf:latest
+```
+
 
 ## Compiling from sources
 
