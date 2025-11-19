@@ -26,11 +26,24 @@ jobs:
     - name: Build source tarball
       run: make dist
 
+    - name: Package Linux binary
+      run: |
+        mkdir -p linux-dist
+        cp diff-pdf linux-dist/
+        strip linux-dist/diff-pdf
+        tar czf diff-pdf-linux-x86_64.tar.gz -C linux-dist diff-pdf
+
     - name: Upload source tarball
       uses: actions/upload-artifact@v4
       with:
         name: source-tarball
-        path: diff-pdf-*.tar.gz
+        path: diff-pdf-[0-9]*.tar.gz
+
+    - name: Upload Linux binary
+      uses: actions/upload-artifact@v4
+      with:
+        name: linux-binary
+        path: diff-pdf-linux-x86_64.tar.gz
 
 
   build-docker:
@@ -122,6 +135,10 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: source-tarball
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: linux-binary
 
       - uses: actions/download-artifact@v4
         with:
