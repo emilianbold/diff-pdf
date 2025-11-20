@@ -43,12 +43,6 @@ dnl === Library checks ===
 PKG_CHECK_MODULES(POPPLER,
                   [glib-2.0 >= 2.36 poppler-glib >= 0.10 cairo-pdf])
 
-AM_OPTIONS_WXCONFIG
-AM_PATH_WXCONFIG([3.0.0], [wxfound=1], [wxfound=0], [core,base])
-if test "$wxfound" != 1 ; then
-    AC_MSG_ERROR([wxWidgets is required])
-fi
-
 dnl === Generate output files ===
 
 AC_CONFIG_FILES([
