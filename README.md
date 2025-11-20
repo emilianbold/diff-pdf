@@ -28,6 +28,15 @@ See `diff-pdf --help` for all options.
 
 Precompiled Linux binaries are available from [GitHub releases](https://github.com/emilianbold/diff-pdf/releases).
 
+**Runtime dependencies:** The binary requires these libraries to be installed:
+```bash
+# Ubuntu/Debian
+sudo apt-get install libpoppler-glib8 libcairo2
+
+# Fedora/CentOS
+sudo dnf install poppler-glib cairo
+```
+
 ### Build from source
 
 ```bash
