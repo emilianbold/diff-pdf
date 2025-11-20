@@ -1,6 +1,6 @@
 # diff-pdf
 
-[![Build](https://github.com/vslavik/diff-pdf/actions/workflows/build.yml/badge.svg)](https://github.com/vslavik/diff-pdf/actions/workflows/build.yml)
+[![Build](https://github.com/emilianbold/diff-pdf/actions/workflows/build.yml/badge.svg)](https://github.com/emilianbold/diff-pdf/actions/workflows/build.yml)
 
 A command-line tool for visually comparing two PDF files on Linux.
 
