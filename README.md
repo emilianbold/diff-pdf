@@ -1,100 +1,144 @@
-*Note: this repository is provided **as-is** and the code is not being actively
-developed. If you wish to improve it, that's greatly appreciated: please make
-the changes and submit a pull request, I'll gladly merge it or help you out
-with finishing it. However, please do not expect any kind of support, including
-implementation of feature requests or fixes. If you're not a developer and/or
-willing to get your hands dirty, this tool is probably not for you.*
+# diff-pdf
 
 [![Build](https://github.com/vslavik/diff-pdf/actions/workflows/build.yml/badge.svg)](https://github.com/vslavik/diff-pdf/actions/workflows/build.yml)
 
+A command-line tool for visually comparing two PDF files on Linux.
+
+## Overview
+
+diff-pdf is a simple but powerful tool that compares two PDF files visually. It rasterizes the pages and compares them pixel-by-pixel, making it ideal for catching visual differences that may not be apparent from text-based diff tools.
+
+By default, it returns exit code 0 if the PDFs are identical and 1 if they differ. It can also generate a visual diff PDF showing the differences highlighted.
+
 ## Usage
 
-diff-pdf is a command-line tool for visually comparing two PDFs.
+### Basic comparison
 
-It takes two PDF files as arguments. By default, its only output is its return
-code, which is 0 if there are no differences and 1 if the two PDFs differ. If
-given the `--output-diff` option, it produces a PDF file with visually
-highlighted differences:
+```bash
+# Compare two PDFs (exit code indicates if they differ)
+diff-pdf file1.pdf file2.pdf
 
-```
-$ diff-pdf --output-diff=diff.pdf a.pdf b.pdf
-```
+# Generate a visual diff PDF
+diff-pdf --output-diff=differences.pdf file1.pdf file2.pdf
 
-See the output of `$ diff-pdf --help` for complete list of options.
-
-
-## Obtaining the binaries
-
-Precompiled Linux binaries are available as part of
-[the latest release](https://github.com/vslavik/diff-pdf/releases/latest/)
-as a tar.gz archive.
-
-On Fedora and CentOS 8:
-```
-$ sudo dnf install diff-pdf
+# Verbose output showing which pages differ
+diff-pdf --verbose file1.pdf file2.pdf
 ```
 
-Precompiled version for openSUSE can be downloaded from the
-[openSUSE build service](http://software.opensuse.org).
+### Advanced options
 
-### Using Docker
+```bash
+# Skip identical pages in the output
+diff-pdf --skip-identical --output-diff=diff.pdf file1.pdf file2.pdf
 
-If you have Docker installed, you can use diff-pdf without installing any dependencies locally:
+# Mark differences with visual indicators
+diff-pdf --mark-differences --output-diff=diff.pdf file1.pdf file2.pdf
 
-```
-$ ./diff-pdf.sh --output-diff=diff.pdf a.pdf b.pdf
-```
+# Grayscale mode (differences shown in color)
+diff-pdf --grayscale --output-diff=diff.pdf file1.pdf file2.pdf
 
-The wrapper script will automatically build the Docker image if needed. Alternatively, you can use Docker directly:
+# Allow tolerance for minor differences
+diff-pdf --channel-tolerance=10 file1.pdf file2.pdf
 
-```
-$ docker build -t diff-pdf:latest .
-$ docker run --rm -v "$(pwd):/pdfs" -w /pdfs diff-pdf:latest --output-diff=diff.pdf a.pdf b.pdf
-```
-
-Pre-built Docker images are available from GitHub Container Registry:
-```
-$ docker pull ghcr.io/emilianbold/diff-pdf:latest
+# Set DPI for rendering (default: 300)
+diff-pdf --dpi=150 file1.pdf file2.pdf
 ```
 
-
-## Compiling from sources
-
-The build system uses Automake and is designed for Linux environments.
-Compilation is done in the usual way:
-
-```
-$ ./bootstrap
-$ ./configure
-$ make
-$ make install
+For complete options, run:
+```bash
+diff-pdf --help
 ```
 
-(Note that the first step, running the `./bootstrap` script, is only required
-when building sources checked from version control system, i.e. when `configure`
-and `Makefile.in` files are missing.)
+## Installation
 
-As for dependencies, diff-pdf requires the following libraries:
+### Precompiled binaries
 
+Download precompiled Linux binaries from [the latest release](https://github.com/vslavik/diff-pdf/releases/latest/).
+
+```bash
+# Download and extract
+wget https://github.com/emilianbold/diff-pdf/releases/latest/download/diff-pdf-linux-x86_64.tar.gz
+tar xzf diff-pdf-linux-x86_64.tar.gz
+sudo install -m 755 diff-pdf /usr/local/bin/
+```
+
+### Distribution packages
+
+**Fedora / CentOS:**
+```bash
+sudo dnf install diff-pdf
+```
+
+**openSUSE:**
+Available from the [openSUSE Build Service](http://software.opensuse.org).
+
+### Docker
+
+Use diff-pdf without installing dependencies:
+
+```bash
+# Using the wrapper script
+./diff-pdf.sh --output-diff=diff.pdf file1.pdf file2.pdf
+
+# Or directly with Docker
+docker run --rm -v "$(pwd):/pdfs" -w /pdfs \
+  ghcr.io/emilianbold/diff-pdf:latest \
+  --output-diff=diff.pdf file1.pdf file2.pdf
+```
+
+## Building from source
+
+### Dependencies
+
+diff-pdf requires:
 - Cairo >= 1.4
 - Poppler >= 0.10
 - GLib >= 2.36
+- Standard build tools (make, automake, g++)
 
-### Ubuntu 24.04 / Debian 12 or newer:
+### Ubuntu / Debian
 
+```bash
+# Install dependencies
+sudo apt-get install make automake g++ \
+  libpoppler-glib-dev libcairo2-dev pkg-config
+
+# Build
+./bootstrap
+./configure
+make
+sudo make install
 ```
-$ sudo apt-get install make automake g++
-$ sudo apt-get install libpoppler-glib-dev libcairo2-dev pkg-config
+
+### Fedora / CentOS
+
+```bash
+# Install dependencies
+sudo yum groupinstall "Development Tools"
+sudo yum install poppler-glib-devel cairo-devel
+
+# Build
+./bootstrap
+./configure
+make
+sudo make install
 ```
 
-### CentOS / Fedora:
+**Note:** The `./bootstrap` step is only needed when building from a git checkout. Release tarballs already include the configure script.
 
-```
-$ sudo yum groupinstall "Development Tools"
-$ sudo yum install poppler-glib-devel cairo-devel
-```
+## Technical details
 
+- Rasterizes PDF pages using Poppler at configurable DPI (default 300)
+- Compares images pixel-by-pixel with optional tolerance
+- Generates visual diffs by combining channels from both PDFs
+- Written in C++ using Cairo, Poppler, and GLib
+- Command-line only (no GUI)
+- Linux-focused but potentially portable to other Unix-like systems
 
-## Installing
+## License
 
-On Linux, the usual `make install` is sufficient.
+GPLv2 - see COPYING file for details.
+
+## Contributing
+
+Contributions are welcome! Please submit pull requests or open issues on GitHub.
