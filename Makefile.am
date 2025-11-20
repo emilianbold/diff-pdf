@@ -1,17 +1,12 @@
 
 bin_PROGRAMS = diff-pdf
 
-diff_pdf_SOURCES = \
-			diff-pdf.cpp \
-			bmpviewer.cpp \
-			bmpviewer.h \
-			gutter.cpp \
-			gutter.h
+diff_pdf_SOURCES = diff-pdf.cpp
 
-diff_pdf_CXXFLAGS = $(POPPLER_CFLAGS) $(WX_CXXFLAGS)
-diff_pdf_LDADD = $(POPPLER_LIBS) $(WX_LIBS)
+diff_pdf_CXXFLAGS = $(POPPLER_CFLAGS)
+diff_pdf_LDADD = $(POPPLER_LIBS)
 
-EXTRA_DIST = bootstrap gtk-zoom-in.xpm gtk-zoom-out.xpm README.md win32/fonts.conf win32/collect-dlls.sh
+EXTRA_DIST = bootstrap README.md win32/fonts.conf win32/collect-dlls.sh
 
 windows-dist: diff-pdf-win-$(VERSION).zip
 
