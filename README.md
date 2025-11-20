@@ -28,19 +28,6 @@ See `diff-pdf --help` for all options.
 
 Precompiled Linux binaries are available from [GitHub releases](https://github.com/emilianbold/diff-pdf/releases).
 
-### Docker
-
-```bash
-./diff-pdf.sh --output-diff=diff.pdf file1.pdf file2.pdf
-```
-
-Or directly:
-```bash
-docker run --rm -v "$(pwd):/pdfs" -w /pdfs \
-  ghcr.io/emilianbold/diff-pdf:latest \
-  --output-diff=diff.pdf file1.pdf file2.pdf
-```
-
 ### Build from source
 
 ```bash
