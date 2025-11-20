@@ -24,6 +24,10 @@ See `diff-pdf --help` for all options.
 
 ## Installation
 
+### Binary releases
+
+Precompiled Linux binaries are available from [GitHub releases](https://github.com/emilianbold/diff-pdf/releases).
+
 ### Docker
 
 ```bash
