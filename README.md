@@ -57,3 +57,20 @@ sudo make install
 ```
 
 Dependencies: Cairo >= 1.4, Poppler >= 0.10, GLib >= 2.36
+
+### Build Debian package
+
+You can build a `.deb` package that handles all dependencies automatically:
+
+```bash
+# Install packaging tools
+sudo apt-get install debhelper devscripts
+
+# Build the package
+dpkg-buildpackage -b -uc -us
+
+# Install the package (it will be in the parent directory)
+sudo dpkg -i ../diff-pdf_*.deb
+```
+
+The Debian package automatically installs all required runtime dependencies.

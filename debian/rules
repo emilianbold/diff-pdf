@@ -1,0 +1,20 @@
+#!/usr/bin/make -f
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+%:
+	dh $@ --with autoreconf
+
+override_dh_auto_configure:
+	./bootstrap
+	dh_auto_configure -- --prefix=/usr
+
+override_dh_auto_install:
+	dh_auto_install
+	# Strip the binary to reduce package size
+	strip debian/diff-pdf/usr/bin/diff-pdf
+
+override_dh_auto_test:
+	# No tests available in upstream
+	@echo "Skipping tests"
