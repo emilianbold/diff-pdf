@@ -1,7 +1,7 @@
 Source: diff-pdf
 Section: utils
 Priority: optional
-Maintainer: Vaclav Slavik <vslavik@fastmail.fm>
+Maintainer: Emilian Bold <emilian.bold@gmail.com>
 Build-Depends: debhelper (>= 10),
                automake,
                autoconf,

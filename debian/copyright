@@ -1,7 +1,7 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: diff-pdf
-Upstream-Contact: Vaclav Slavik <vaclav@slavik.io>
-Source: https://github.com/vslavik/diff-pdf
+Upstream-Contact: Emilian Bold <emilian.bold@gmail.com>
+Source: https://github.com/emilianbold/diff-pdf
 
 Files: *
 Copyright: 2009 TT-Solutions
