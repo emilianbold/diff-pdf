@@ -1,7 +1,5 @@
 diff-pdf (0.5.2-1) unstable; urgency=medium
 
   * Initial Debian package release
-  * Package upstream version 0.5.2
-  * Add proper dependency handling for libpoppler-glib and libcairo2
 
- -- Vaclav Slavik <vslavik@fastmail.fm>  Thu, 21 Nov 2025 00:00:00 +0000
+ -- Emilian Bold <emilian.bold@gmail.com>  Thu, 21 Nov 2025 00:00:00 +0000
