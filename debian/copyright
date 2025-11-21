@@ -7,10 +7,6 @@ Files: *
 Copyright: 2009 TT-Solutions
 License: GPL-2+
 
-Files: debian/*
-Copyright: 2025 Vaclav Slavik <vslavik@fastmail.fm>
-License: GPL-2+
-
 License: GPL-2+
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
