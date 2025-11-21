@@ -6,7 +6,7 @@ A command-line tool for visually comparing two PDF files on Linux.
 
 ## Example
 
-![diff-pdf output showing visual differences between two PDFs](samples/diff-pdf-demo.png)
+<img src="samples/diff-pdf-demo.png" alt="diff-pdf output showing visual differences between two PDFs" width="600">
 
 The tool highlights differences between PDFs, making it easy to spot changes in text, colors, and layout.
 
