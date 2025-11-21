@@ -1,0 +1,5 @@
+diff-pdf (0.5.2-1) unstable; urgency=medium
+
+  * Initial Debian package release
+
+ -- Emilian Bold <emilian.bold@gmail.com>  Thu, 21 Nov 2025 00:00:00 +0000
